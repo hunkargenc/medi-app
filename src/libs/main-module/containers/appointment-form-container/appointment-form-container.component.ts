@@ -13,11 +13,11 @@ export class AppointmentFormContainerComponent implements OnInit {
 
   appointmentForm = this.formBuilder.group({
     fullName: this.formBuilder.control(null, [Validators.required]),
-    email: this.formBuilder.control(null, [Validators.required]),
-    mobile: this.formBuilder.control(null, [Validators.required]),
-    city: this.formBuilder.control(null, [Validators.required]),
-    sex: this.formBuilder.control(null, [Validators.required]),
-    job: this.formBuilder.control(null, [Validators.required]),
+    email: this.formBuilder.control(null, [Validators.email]),
+    mobile: this.formBuilder.control(null, [Validators.required, Validators.minLength(8)]),
+    city: this.formBuilder.control(null),
+    sex: this.formBuilder.control(null),
+    job: this.formBuilder.control(null),
     appointmentDate: this.formBuilder.control(null, [Validators.required]),
     isSure: this.formBuilder.control(null, [Validators.required]),
   })
