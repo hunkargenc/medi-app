@@ -5,15 +5,21 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ReactiveFormsModule } from '@angular/forms';
+//import { MatFormFieldModule } from '@angular/material/form-field';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 import { MainModuleRoutingModule } from './main-module-routing.module';
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppointmentFormContainerComponent } from './containers/appointment-form-container/appointment-form-container.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,14 @@ import { AppointmentFormContainerComponent } from './containers/appointment-form
     MatGridListModule,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule,
+    ReactiveFormsModule,
+    // MatFormFieldModule,
+    // BrowserAnimationsModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatNativeDateModule
   ],
+  providers: [],
 })
 export class MainModuleModule {}
