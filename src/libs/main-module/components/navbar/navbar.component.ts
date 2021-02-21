@@ -16,4 +16,8 @@ export class NavbarComponent implements OnInit {
   goToAppointment= function () {
     this.router.navigateByUrl('/appointment-form');
   };
+
+  goToHome= function () {
+    this.router.navigateByUrl('/home');
+  };
 }
