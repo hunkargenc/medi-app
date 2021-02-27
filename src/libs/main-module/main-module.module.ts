@@ -20,6 +20,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppointmentFormContainerComponent } from './containers/appointment-form-container/appointment-form-container.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AppointmentFormService } from './services/appointment-form-services/appointment-form.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    AppointmentFormService
+  ],
 })
 export class MainModuleModule {}
