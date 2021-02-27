@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "mediapp-66a02": {
+      "hosting": {
+        "medi-app": [
+          "mediapp-66a02"
+        ]
+      }
+    }
+  }
+}
