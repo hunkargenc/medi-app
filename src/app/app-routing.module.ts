@@ -9,7 +9,27 @@ const routes: Routes = [
         (m) => m.MainModuleModule
       ),
   },
-  
+  {
+    path: 'admin',
+    loadChildren: () =>
+    import('../libs/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'admin-dashboard',
+    loadChildren: () =>
+    import('../libs/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'list-appointment',
+    loadChildren: () =>
+    import('../libs/admin/admin.module').then((m) => m.AdminModule),
+  },
+  // {
+  //   path: 'admin',
+  //   pathMatch: 'full',
+  //   component: AdminContainerComponent,
+  //   ...canActivate(redirectLoggedInToProfile)
+  // },
 ];
 
 @NgModule({

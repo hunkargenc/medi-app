@@ -42,7 +42,6 @@ import { EffectsModule } from '@ngrx/effects';
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
