@@ -20,4 +20,15 @@ export class ListAppointmentService {
     return this.firestore.collection("appointments").valueChanges();
   }
 
+  getAppointmentByNameStartWithStr(str) {
+    return this.firestore.collection("appointments", ref => ref
+      .where('fullName', '>=', str)
+      .where(
+        'fullName',
+        '<',
+        str.replace(/.$/, (c) => String.fromCharCode(c.charCodeAt(0) + 1))
+      )
+      .limit(6)).valueChanges();
+  }
+
 }

@@ -52,16 +52,16 @@
       <div class="controles-container">
         <div class="add-bottom-padding">
           <mat-radio-group formControlName="sex">
-            <mat-radio-button value="1"> Kadın </mat-radio-button>
-            <mat-radio-button value="2"> Erkek </mat-radio-button>
-            <mat-radio-button value="3"> Belirtmek istemiyorum </mat-radio-button>
+            <mat-radio-button value="Kadın"> Kadın </mat-radio-button>
+            <mat-radio-button value="Erkek"> Erkek </mat-radio-button>
+            <mat-radio-button value="Belirtmek istemiyorum"> Belirtmek istemiyorum </mat-radio-button>
           </mat-radio-group>
         </div>
         <mat-form-field>
           <mat-select formControlName="job" placeholder="Mesleğiniz">
             <mat-option>Belirtmek istemiyorum</mat-option>
             <ng-container *ngFor="let job of jobs">
-              <mat-option value="{{ job.id }}">{{ job.value }}</mat-option>
+              <mat-option value="{{ job.value }}">{{ job.value }}</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>

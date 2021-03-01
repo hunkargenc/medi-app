@@ -10,13 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+//import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminContainerComponent } from './containers/admin-container/admin-container.component';
 import { AdminDashboardContainerComponent } from './containers/admin-dashboard-container/admin-dashboard-container.component';
 import { ListAppointmentContainerComponent } from './containers/list-appointment-container/list-appointment-container.component';
 import { ListAppointmentService } from './services/list-appointment-services/list-appointment.service';
-
 
 @NgModule({
   declarations: [
@@ -27,8 +30,8 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
   imports: [
     CommonModule,
     AdminRoutingModule,
-    // BrowserModule,
-    // BrowserAnimationsModule,
+    //BrowserModule,
+    //BrowserAnimationsModule,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -39,14 +42,13 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
     MatInputModule,
     //AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule,
+    MatCardModule
     //StoreModule.forRoot({}, {}),
     //EffectsModule.forRoot([]),
     //!environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [
-    ListAppointmentService
-  ],
-  
+  providers: [ListAppointmentService],
 })
 export class AdminModule {}

@@ -29,9 +29,9 @@ export class AppointmentFormContainerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase, private service: AppointmentFormService) { }
 
   jobs = [
-    {id:3, value: 'Yazılım Mühendisi/Bilgisayar Mühendisi/Analist'},
-    {id:2, value: 'Bankacı/Müfettiş/Öğretmen'},
-    {id:1, value: 'Öğrenci/Serbest Meslek/Kendi işini yapıyor'},
+    {id:3, value: 'Öğrenci'},
+    {id:2, value: 'Özel Sektör'},
+    {id:1, value: 'Kamu Çalışanı'},
   ]
 
   handleAddClicked() {
