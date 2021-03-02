@@ -30,7 +30,7 @@ export class AppointmentFormService {
     this.firestore.collection("appointments").add({
           ...appointmentInfo,
           //job: job.value,
-          //date: new Date().getTime()
+          //appointmentDate: appointmentDate
     })
     alert('Randevu talebiniz oluşturuldu. En kısa sürede sizinle iletişime geçilecektir.')
     setTimeout(() => {

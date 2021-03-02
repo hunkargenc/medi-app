@@ -15,7 +15,7 @@ table {
     width: 100%;
 }
 
-.post-list-container {
+.app-list-container {
     display: flex;
     flex-direction: column;
     padding: 1em;
@@ -23,7 +23,8 @@ table {
     mat-card {
       margin: 1em;
     }
-  
+
+    
     mat-card-actions {
       display: flex;
       justify-content: center;
@@ -36,7 +37,8 @@ table {
     }
   }
 
-// .search-posts-form-container{
-//     width: 100%;
-//     padding: 1em;
-// }
+.form-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.34375em;
+}

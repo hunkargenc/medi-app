@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, switchMap, takeWhile } from 'rxjs/operators';
 import { ListAppointmentService } from '../../services/list-appointment-services/list-appointment.service';
 import { MatTableDataSource } from '@angular/material/table';
+
 // import { userInfo } from 'os';
 
 export interface Appointments {
@@ -24,19 +25,34 @@ export interface Appointments {
   styleUrls: ['./list-appointment-container.component.scss'],
 })
 export class ListAppointmentContainerComponent implements OnInit {
-
-  displayedColumns: string[] = ['fullName', 'email', 'mobile', 'city', 'sex', 'job', 'appointmentDate', 'isSure'];
+  displayedColumns = [
+    'fullName',
+    'email',
+    'mobile',
+    'city',
+    'sex',
+    'job',
+    'appointmentDate',
+    'isSure',
+  ];
   dataSource;
-  
+
   appointments = [];
 
-  // filteredAppointments;
-
-  nameFormControl = new FormControl(null);
-
-  // getAppointmentssSubject = new Subject();
-
   subscriptions: Subscription = new Subscription();
+
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredAppointments = this.listFilter
+      ? this.doFilter(this.listFilter)
+      : this.appointments;
+  }
+
+  filteredAppointments: Appointments[] = [];
 
   navItems = [
     {
@@ -61,7 +77,10 @@ export class ListAppointmentContainerComponent implements OnInit {
     public auth: AngularFireAuth,
     private router: Router,
     private appointmentsDbService: ListAppointmentService
-  ) {}
+  ) {
+    this.filteredAppointments = this.appointments;
+    this.listFilter = '';
+  }
 
   logout() {
     this.auth.signOut().then(() => {
@@ -69,6 +88,11 @@ export class ListAppointmentContainerComponent implements OnInit {
     });
   }
 
+  doFilter(filterBy: string): Appointments[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.appointments.filter((appointment: Appointments) =>
+        appointment.fullName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -77,19 +101,5 @@ export class ListAppointmentContainerComponent implements OnInit {
         this.dataSource = new MatTableDataSource(appointments);
       })
     );
-
-    // this.filteredAppointments = this.nameFormControl.valueChanges.pipe(
-    //   filter(value => typeof(value) == "string"),
-    //   debounceTime(400),
-    //   switchMap((str) => {
-    //     return this.appointmentsDbService.getProfileByNameStartWithStr(str);
-    //   })
-    // );
-
-    // getAppointments(appointment) {
-    //   console.log(deger);
-    //   this.getAppointmentssSubject.next(deger.userId);
-    // }
-
   }
 }

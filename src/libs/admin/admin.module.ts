@@ -13,7 +13,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 //import { BrowserModule } from '@angular/platform-browser';
+//import { FormsModule } from '@angular/forms';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { HttpClientModule } from '@angular/common/http';
+
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminContainerComponent } from './containers/admin-container/admin-container.component';
@@ -30,8 +33,6 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
   imports: [
     CommonModule,
     AdminRoutingModule,
-    //BrowserModule,
-    //BrowserAnimationsModule,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -44,10 +45,16 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
     ReactiveFormsModule,
     MatTableModule,
     MatAutocompleteModule,
-    MatCardModule
+    MatCardModule,
+    //FormsModule,
     //StoreModule.forRoot({}, {}),
     //EffectsModule.forRoot([]),
     //!environment.production ? StoreDevtoolsModule.instrument() : []
+    //BrowserModule,
+    //BrowserAnimationsModule,
+    //HttpClientModule
+    
+
   ],
   providers: [ListAppointmentService],
 })

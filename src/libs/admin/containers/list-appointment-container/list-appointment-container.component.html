@@ -14,16 +14,24 @@
         </button>
         <span>Yönetim Paneli</span>
       </mat-toolbar>
-      <div class="post-list-container">
+      
+      <!-- <div class="form-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Filter By Name</mat-label>
+          <input [ngModel]="listFilter" (ngModelChange)="listFilter=$event" autocomplete="off" type="text"  matInput placeholder="Name">
+        </mat-form-field>
+      </div> -->
+
+      <div class="app-list-container">
         <ng-container *ngFor="let appointment of appointments">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>{{appointment.fullName}} | {{appointment.appointmentDate}} </mat-card-title>
+              <mat-card-title>{{appointment.fullName}} | <span style="color:blueviolet">{{appointment.appointmentDate * 1000  | date: 'dd MM 2021'}}</span></mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p>
+              <span>
                 {{appointment.email}} | {{appointment.mobile}} | {{appointment.city}} | {{appointment.job}} | {{appointment.sex}}    
-              </p>
+              </span>
             </mat-card-content>
           </mat-card>
         </ng-container>

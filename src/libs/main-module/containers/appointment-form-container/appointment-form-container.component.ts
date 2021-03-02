@@ -20,7 +20,7 @@ export class AppointmentFormContainerComponent implements OnInit {
     city: this.formBuilder.control(null),
     sex: this.formBuilder.control(null),
     job: this.formBuilder.control(null),
-    appointmentDate: this.formBuilder.control(null, [Validators.required]),
+    appointmentDate: this.formBuilder.control(null, [Validators.required]).toString(),
     isSure: this.formBuilder.control(null, [Validators.required]),
   })
 
