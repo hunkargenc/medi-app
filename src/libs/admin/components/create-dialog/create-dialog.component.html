@@ -1,0 +1,113 @@
+<div class="container">
+    <mat-toolbar>
+      <span class="fill-remaining-space"></span>
+      <span>Randevu Formu</span>
+      <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+  </div>
+<form [formGroup]="appointmentForm" class="normal-form">
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <!-- <input type="hidden" formControlName="$key" /> -->
+          <mat-form-field>
+            <input
+              formControlName="fullName"
+              matInput
+              placeholder="Adınız ve soyadınız*"
+            />
+            <mat-error>Bu alan zorunlu.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="E-posta adresiniz*"
+            />
+            <mat-error>Geçersiz e-posta.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="mobile"
+              matInput
+              placeholder="Cep telefonunuz*"
+            />
+            <mat-error>Bu alan zorunlu ve minimum 8 karakter olmalıdır.</mat-error>
+            <!-- <mat-error *ngIf="controls[mobile].errors?required">Bu alan zorunlu.</mat-error>
+            <mat-error *ngIf="controls[mobile].errors?minlength">Minimum 8 karakter olmalıdır.</mat-error> -->
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="city"
+              matInput
+              placeholder="Bulunduğunuz şehir"
+            />
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="sex">
+              <mat-radio-button value="Kadın"> Kadın </mat-radio-button>
+              <mat-radio-button value="Erkek"> Erkek </mat-radio-button>
+              <mat-radio-button value="Belirtmek istemiyorum"> Belirtmek istemiyorum </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field>
+            <mat-select formControlName="job" placeholder="Mesleğiniz">
+              <mat-option>Belirtmek istemiyorum</mat-option>
+              <ng-container *ngFor="let job of jobs">
+                <mat-option value="{{ job.value }}">{{ job.value }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field> -->
+          <!-- <input
+              formControlName="appointmentDate"
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Randevu tarihini seçiniz"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle> -->
+          <!-- <mat-datepicker #picker></mat-datepicker> -->
+          <!-- </mat-form-field> -->
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="appointmentDate"
+              [matDatepicker]="picker"
+              placeholder="Randevu tarihi seçiniz*"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="add-bottom-padding">
+            <mat-checkbox formControlName="isSure"
+              >Bilgilerin doğruluğundan eminim.*</mat-checkbox
+            >
+            <mat-error>Bilgilerin doğruluğunu teyit ediniz.</mat-error>
+          </div>
+          <!-- <div class="button-row">
+            <button mat-raised-button-color="primary" type="submit">
+              Gönder
+            </button>
+            <button mat-raised-button-color="warn">İptal</button>
+          </div> -->
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="container">
+      <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button mat-raised-button color="primary" type="submit" (click)="handleAddClicked()">Gönder</button>
+        <span class="fill-remaining-space"></span>
+      </mat-toolbar>
+    </div>
+</form>

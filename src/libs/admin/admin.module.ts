@@ -8,27 +8,34 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
-//import { BrowserModule } from '@angular/platform-browser';
-//import { FormsModule } from '@angular/forms';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { HttpClientModule } from '@angular/common/http';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminContainerComponent } from './containers/admin-container/admin-container.component';
 import { AdminDashboardContainerComponent } from './containers/admin-dashboard-container/admin-dashboard-container.component';
 import { ListAppointmentContainerComponent } from './containers/list-appointment-container/list-appointment-container.component';
 import { ListAppointmentService } from './services/list-appointment-services/list-appointment.service';
+import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AppointmentFormContainerComponent } from '../main-module/containers/appointment-form-container/appointment-form-container.component';
 
 @NgModule({
   declarations: [
     AdminContainerComponent,
     AdminDashboardContainerComponent,
     ListAppointmentContainerComponent,
+    CreateDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -41,21 +48,28 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    //AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
     MatTableModule,
     MatAutocompleteModule,
     MatCardModule,
-    //FormsModule,
-    //StoreModule.forRoot({}, {}),
-    //EffectsModule.forRoot([]),
-    //!environment.production ? StoreDevtoolsModule.instrument() : []
-    //BrowserModule,
-    //BrowserAnimationsModule,
-    //HttpClientModule
+    MatPaginatorModule,
+    MatSortModule,
+    FormsModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
-
   ],
+  exports: [],
+  
   providers: [ListAppointmentService],
+  entryComponents: [AppointmentFormContainerComponent],
+  
 })
-export class AdminModule {}
+export class AdminModule {
+  
+}

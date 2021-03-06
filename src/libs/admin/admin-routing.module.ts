@@ -5,6 +5,8 @@ import { canActivate } from '@angular/fire/auth-guard';
 import { AdminContainerComponent } from './containers/admin-container/admin-container.component';
 import { AdminDashboardContainerComponent } from './containers/admin-dashboard-container/admin-dashboard-container.component';
 import { ListAppointmentContainerComponent } from './containers/list-appointment-container/list-appointment-container.component';
+//import { AppointmentFormService } from '../main-module/services/appointment-form-services/appointment-form.service';
+import { AppointmentFormContainerComponent } from '../main-module/containers/appointment-form-container/appointment-form-container.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/login']);
@@ -39,6 +41,11 @@ const routes: Routes = [
     component: ListAppointmentContainerComponent,
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  // {
+  //   path: 'appointment-form',
+  //   component: AppointmentFormContainerComponent,
+  //   ...canActivate(redirectUnauthorizedToLogin)
+  // },
   // {
   //   path: 'admin-dashboard',
   //   loadChildren: () => import('../libs/modules/admin/admin-dashboard').then(m => m.AdminDashboardContainerComponent),

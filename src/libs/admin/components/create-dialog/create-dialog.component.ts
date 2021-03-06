@@ -2,15 +2,17 @@ import {Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from  '@angular/fire/database'; 
-import { AppointmentFormService } from '../../services/appointment-form-services/appointment-form.service';
+import { AppointmentFormService } from 'src/libs/main-module/services/appointment-form-services/appointment-form.service'
+import { ListAppointmentService } from '../../services/list-appointment-services/list-appointment.service';
+import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-appointment-form-container',
-  templateUrl: './appointment-form-container.component.html',
-  styleUrls: ['./appointment-form-container.component.scss']
+  selector: 'app-create-dialog',
+  templateUrl: './create-dialog.component.html',
+  styleUrls: ['./create-dialog.component.scss']
 })
-export class AppointmentFormContainerComponent implements OnInit {
+export class CreateDialogComponent implements OnInit {
 
   appointments = []
 
@@ -27,7 +29,7 @@ export class AppointmentFormContainerComponent implements OnInit {
 
   subscriptions: Subscription = new Subscription();
 
-  constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase, private service: AppointmentFormService) { }
+  constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase, private service: AppointmentFormService, private listService: ListAppointmentService, private router: Router) { }
 
   jobs = [
     {id:3, value: 'Öğrenci'},
@@ -36,13 +38,11 @@ export class AppointmentFormContainerComponent implements OnInit {
   ]
 
   handleAddClicked() {
-    this.service.addAppointment(this.appointmentForm.value);
+    this.listService.addAdminAppointment(this.appointmentForm.value);
   }
 
   ngOnInit(): void {
     
   }
-
-  
-
 }
+

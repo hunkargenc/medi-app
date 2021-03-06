@@ -37,4 +37,17 @@ export class AppointmentFormService {
       this.router.navigate(['/home']);
    }, 2000);
   }
+
+  // updateAppointment(appointment, value) {
+  //   value
+  //   this.firestore.collection("appointments").valueChanges({
+  //         //...appointmentInfo,
+  //         //job: job.value,
+  //         //appointmentDate: appointmentDate
+  //   })
+  //   alert('Randevu düzenlendi.')
+  //   setTimeout(() => {
+  //     this.router.navigate(['/admin/list-appointment']);
+  //  }, 2000);
+  // }
 }
