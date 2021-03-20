@@ -1,30 +1,16 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, switchMap, takeWhile } from 'rxjs/operators';
 import { ListAppointmentService } from '../../services/list-appointment-services/list-appointment.service';
 import { MatTableDataSource } from '@angular/material/table';
-//import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog'
-import { AppointmentFormContainerComponent } from 'src/libs/main-module/containers/appointment-form-container/appointment-form-container.component';
 import { CreateDialogComponent } from '../../components/create-dialog/create-dialog.component';
-import { AppointmentFormService } from 'src/libs/main-module/services/appointment-form-services/appointment-form.service';
-import { AngularFireDatabase } from '@angular/fire/database';
-//import { CreateDialogComponent } from '../../components/create-dialog/create-dialog.component';
-//import {MatTableDataSource} from '@angular/material/table';
-
-// import { userInfo } from 'os';
-
+import { UpdateDialogComponent } from '../../components/update-dialog/update-dialog.component';
 export interface Appointments {
   fullName: string;
   email: string;
@@ -36,16 +22,12 @@ export interface Appointments {
   isSure: boolean;
 }
 
-// const appointments: Appointments[] = [
-//   fullName: this.fullName
-// ];
 @Component({
   selector: 'app-list-appointment-container',
   templateUrl: './list-appointment-container.component.html',
   styleUrls: ['./list-appointment-container.component.scss'],
 })
 export class ListAppointmentContainerComponent implements OnInit {
-
   appointments = []
 
   appointmentForm = this.formBuilder.group({
@@ -62,9 +44,9 @@ export class ListAppointmentContainerComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
 
   dataSource: MatTableDataSource<any>;
-  // dataSource: MatSort<any>;
 
   displayedColumn: string[] = [
+    //'id',
     'fullName',
     'email',
     'mobile',
@@ -83,6 +65,7 @@ export class ListAppointmentContainerComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort=this.sort;
@@ -98,24 +81,9 @@ export class ListAppointmentContainerComponent implements OnInit {
       name: 'Randevu Talepleri',
       routerLink: '/admin/list-appointment',
     },
-    // {
-    //   name: "CSS",
-    //   routerLink: "css"
-    // },
-    // {
-    //   name: "Details",
-    //   routerLink: "technical"
-    // }
   ];
-
-
-  constructor(
-    public auth: AngularFireAuth,
-    private router: Router,
-    private appointmentsDbService: ListAppointmentService,
-    public dialog: MatDialog,
-    private appointmentFormService: AppointmentFormService,
-    private formBuilder: FormBuilder, private db: AngularFireDatabase
+    
+  constructor(public auth: AngularFireAuth, private router: Router, private appointmentsDbService: ListAppointmentService, public dialog: MatDialog, private formBuilder: FormBuilder, 
   ) {}
 
   logout() {
@@ -128,7 +96,6 @@ export class ListAppointmentContainerComponent implements OnInit {
     this.subscriptions.add(
       this.appointmentsDbService.getAppointments().subscribe((appointments) => {
         this.appointments = appointments;
-        //this.isLoading = false;
         this.dataSource = new MatTableDataSource(appointments);
         this.dataSource.paginator=this.paginator;
         this.dataSource.sort=this.sort;
@@ -153,7 +120,6 @@ export class ListAppointmentContainerComponent implements OnInit {
     this.getAppointmentsSubject.next(
       appointment.getAppointments().subscribe((appointments) => {
         this.appointments = appointments;
-        //this.isLoading = false;
         this.dataSource = new MatTableDataSource(appointments);
         this.dataSource.paginator=this.paginator;
         this.dataSource.sort=this.sort;
@@ -188,8 +154,9 @@ export class ListAppointmentContainerComponent implements OnInit {
     });
   }
 
-  openUpdateDialog(): void {
-    const dialogRef = this.dialog.open(CreateDialogComponent, {
+  openUpdateDialog(row): void {
+    console.log(row)
+    const dialogRef = this.dialog.open(UpdateDialogComponent, {
       width: '1000px',
       data: {component: ListAppointmentContainerComponent}
     });
@@ -198,22 +165,13 @@ export class ListAppointmentContainerComponent implements OnInit {
     });
   }
 
-  onDelete($key){
-    if(confirm('Randevuyu silmek istediğinize emin misiniz?')){
-      console.log($key)
-      this.appointmentsDbService.deleteAppointments($key);
-      //this.notificationService.warn('Başarıyla silindi.');
+  onDelete(index: number, e){
+    if(window.confirm('Are you sure?')) {
+      const data = this.dataSource.data;
+      data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
+      this.dataSource.data = data;
+      this.appointmentsDbService.deleteAppointment(e)
     }
   }
-
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
-
-  // handleUpdateClicked() {
-  //   this.router.navigateByUrl('/appointment-form');
-  //   this.appointmentFormService.updateAppointment(this.appointmentForm.value);
-  // }
-  
 }
 

@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import { MatTableDataSource } from '@angular/material/table';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
-//import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class ListAppointmentService {
   
-  appointmentList = []
-  // listData = []
-
   constructor(private firestore: AngularFirestore, private firebase: AngularFireDatabase, private router: Router ) { }
   
   getAppointments() {
@@ -23,7 +16,7 @@ export class ListAppointmentService {
     // This returns the whole collection causing too many document reads.
     return this.firestore.collection("appointments", ref=>ref
     .orderBy('appointmentDate','asc')
-    ).valueChanges().pipe(filter(value=>!!value));
+    ).valueChanges({ idField: 'propertyId' }).pipe(filter(value=>!!value));
   }
 
   getProfileByNameStartWithStr(str) {
@@ -39,25 +32,25 @@ export class ListAppointmentService {
 
   addAdminAppointment(appointmentInfo) {
     this.firestore.collection("appointments").add({
-          ...appointmentInfo,
-          //job: job.value,
-          //appointmentDate: appointmentDate
+      ...appointmentInfo,
     })
-  //   setTimeout(() => {
-  //     this.router.navigate(['admin/list-appointment']);
-  //  }, 2000);
    alert('Randevu oluşturuldu.')
+   window.location.reload();
   }
 
-  deleteAppointments(key: string){
-    console.log(key)
-    this.firestore.collection('appointments').doc(key).delete()
+  updateAppointment(data) {
+    return this.firestore
+      .collection("appointments")
+      .doc(data)
+      .set({ completed: true }, { merge: true });
+  }
+
+  deleteAppointment(data){
+    this.firestore.collection("appointments").doc(data.propertyId).delete()
     .then(() => {
       console.log("Document successfully deleted!");
     }).catch((error) => {
       console.error("Error removing document: ", error);
     });
   }
-
-
 }

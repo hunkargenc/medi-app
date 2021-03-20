@@ -29,6 +29,7 @@ import { ListAppointmentService } from './services/list-appointment-services/lis
 import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AppointmentFormContainerComponent } from '../main-module/containers/appointment-form-container/appointment-form-container.component';
+import { UpdateDialogComponent } from './components/update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AppointmentFormContainerComponent } from '../main-module/containers/app
     AdminDashboardContainerComponent,
     ListAppointmentContainerComponent,
     CreateDialogComponent,
+    UpdateDialogComponent,
   ],
   imports: [
     CommonModule,
